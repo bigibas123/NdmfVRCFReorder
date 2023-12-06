@@ -2,6 +2,7 @@
   "name": "tk.dingemans.bigibas123.NdmfVrcfReorder",
   "references": [
     "VRCFury-Editor",
+    "VRCFury",
     "nadena.dev.ndmf",
     "nadena.dev.ndmf.runtime",
     "VRC.SDKBase.Editor",
