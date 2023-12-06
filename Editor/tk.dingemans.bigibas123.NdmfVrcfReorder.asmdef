@@ -1,0 +1,25 @@
+﻿{
+  "name": "tk.dingemans.bigibas123.NdmfVrcfReorder",
+  "references": [
+    "VRCFury-Editor",
+    "nadena.dev.ndmf",
+    "nadena.dev.ndmf.runtime",
+    "VRC.SDKBase.Editor",
+    "VRC.SDK3A.Editor",
+    "VRC.SDKBase",
+    "VRC.SDK3A"
+  ],
+  "precompiledReferences": [
+    "System.Collections.Immutable.dll",
+    "Newtonsoft.Json.Vrcf.dll",
+    "VRCSDKBase.dll",
+    "VRCSDK3A.dll",
+    "VRC.Dynamics.dll",
+    "VRC.SDK3.Dynamics.PhysBone.dll",
+    "VRC.SDK3.Dynamics.Contact.dll",
+    "VRCSDKBase-Editor.dll"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ]
+}

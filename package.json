@@ -1,0 +1,20 @@
+{
+  "name" : "tk.dingemans.bigibas123.ndmfvrcfreorder",
+  "displayName" : "NDMF VRCF Reorderer",
+  "version" : "0.1.0",
+  "license": "MIT",
+  "author": {
+    "name": "bigibas123",
+    "email": "sebastiaandingemans@gmail.com"
+  },
+  "unity" : "2019.4",
+  "description" : "Hopefully reorders some C# classes to run ndmf and vrcfury in the right order",
+  "vpmDependencies" : {
+    "nadena.dev.ndmf" : "1.2.5",
+	"com.vrcfury.vrcfury": "1.623.0"
+  },
+  "url" : "http://example.com/",
+  "legacyFolders" : {},
+  "legacyFiles" : {},
+  "legacyPackages": []
+}
