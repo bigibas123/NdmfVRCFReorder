@@ -11,7 +11,7 @@
   "description" : "Hopefully reorders some C# classes to run ndmf and vrcfury in the right order",
   "vpmDependencies" : {
     "nadena.dev.ndmf" : "1.2.5",
-	"com.vrcfury.vrcfury": "1.623.0"
+	"com.vrcfury.vrcfury": "1.x"
   },
   "url" : "http://example.com/",
   "legacyFolders" : {},
