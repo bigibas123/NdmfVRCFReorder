@@ -1,5 +1,5 @@
 # NDMF VRCF Reorderer
-# <span style="color:red">Not necessary anymore from VRCFury 1.648.0 onwards</span>
+# <span style="color:red">Should not be necessary anymore from VRCFury 1.648.0 onwards</span>
 
 Tries to make running [VRCFury](https://vrcfury.com/) with [NDMF](https://github.com/bdunderscore/ndmf.git) and [AvatarOptimizer](https://github.com/anatawa12/AvatarOptimizer.git) a bit more predictable.
 
