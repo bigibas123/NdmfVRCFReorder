@@ -1,7 +1,7 @@
 {
   "name" : "tk.dingemans.bigibas123.ndmfvrcfreorder",
   "displayName" : "NDMF VRCF Reorderer",
-  "version" : "0.2.0",
+  "version" : "0.3.0",
   "license": "EPL-2.0",
   "author": {
     "name": "bigibas123"
@@ -9,7 +9,7 @@
   "unity" : "2022.3",
   "description" : "Hopefully reorders some C# classes to run ndmf and vrcfury in the right order",
   "vpmDependencies" : {
-    "nadena.dev.ndmf" : "1.2.5",
+    "nadena.dev.ndmf" : "1.x.x",
 	"com.vrcfury.vrcfury": "1.x"
   },
   "url" : "https://github.com/bigibas123/tk.dingemans.bigibas123.ndmfvrcfreorder.git",
