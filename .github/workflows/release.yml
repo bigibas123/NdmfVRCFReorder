@@ -80,4 +80,3 @@ jobs:
             ${{ steps.package_data.outputs.name }}-${{ env.version }}.zip
             ${{ env.PACKAGE_JSON }}
           tag_name: ${{ env.version }}
-          prerelease: true
