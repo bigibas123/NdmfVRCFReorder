@@ -51,6 +51,9 @@ jobs:
         with:
           package-path: ${{ steps.package_data.outputs.name }}-${{ steps.tag_version.outputs.inc-prerelease }}.unitypackage
           include-files: metaList
+      - name: Create Package Zip
+        working-directory: "${{ env.PACKAGE_PATH }}"
+        run: zip -r "${{ steps.package_data.outputs.name }}-${{ steps.tag_version.outputs.inc-prerelease }}.zip" .
 
       - name: Create Tag
         id: create_tag
@@ -63,6 +66,7 @@ jobs:
         with:
           files: |
             ${{ steps.package_data.outputs.name }}-${{ steps.tag_version.outputs.inc-prerelease }}.unitypackage
+            ${{ steps.package_data.outputs.name }}-${{ steps.tag_version.outputs.inc-prerelease }}.zip
             ${{ env.PACKAGE_JSON }}
           tag_name: ${{ steps.tag_version.outputs.inc-prerelease }}
           prerelease: true
