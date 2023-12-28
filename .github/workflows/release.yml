@@ -19,17 +19,18 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4.1.1
-        
-        
+        with: 
+          fetch-tags: true
+      
+      
       - name: Get package properties
         id: package_data
         uses: zoexx/github-action-json-file-properties@1.0.4
         with:
           file_path: "${{ env.PACKAGE_JSON }}"
 
-      - name: 'Get Previous tag'
+      - uses: WyriHaximus/github-action-get-previous-tag@v1.3.0
         id: previous_tag
-        uses: "WyriHaximus/github-action-get-previous-tag@v1"
         with:
           fallback: 0.0.0
 
@@ -40,6 +41,16 @@ jobs:
           lenient: false
           version: ${{ steps.previous_tag.outputs.tag }}
           compare-to: ${{ steps.package_data.outputs.version }}
+      - name: Pick Incremented old tag
+        id: tag_pre_release
+        if: ${{ steps.tag_version.outputs.comparison-result != '<' }}
+        run: |
+          echo "version=${{ steps.version.outputs.inc-prerelease }}" >> $GITHUB_ENV
+      - name: Pick package version
+        id: tag_post_release
+        if: ${{ steps.tag_version.outputs.comparison-result == '<' }}
+        run: |
+          echo "version=${{ steps.package_data.outputs.version }}" >> $GITHUB_ENV
         
         
       - name: Track Package Meta Files
@@ -49,24 +60,24 @@ jobs:
       - name: Create UnityPackage
         uses: pCYSl5EDgo/create-unitypackage@cfcd3cf0391a5ef1306342794866a9897c32af0b
         with:
-          package-path: ${{ steps.package_data.outputs.name }}-${{ steps.tag_version.outputs.inc-prerelease }}.unitypackage
+          package-path: ${{ steps.package_data.outputs.name }}-${{ env.version }}.unitypackage
           include-files: metaList
       - name: Create Package Zip
         working-directory: "${{ env.PACKAGE_PATH }}"
-        run: zip -r "${{ steps.package_data.outputs.name }}-${{ steps.tag_version.outputs.inc-prerelease }}.zip" .
+        run: zip -r "${{ steps.package_data.outputs.name }}-${{ env.version }}.zip" .
 
       - name: Create Tag
         id: create_tag
         uses: rickstaa/action-create-tag@88dbf7ff6fe2405f8e8f6c6fdfd78829bc631f83
         with:
-          tag: ${{ steps.tag_version.outputs.inc-prerelease }}
+          tag: ${{ env.version }}
       
       - name: Make Release
         uses: softprops/action-gh-release@de2c0eb89ae2a093876385947365aca7b0e5f844
         with:
           files: |
-            ${{ steps.package_data.outputs.name }}-${{ steps.tag_version.outputs.inc-prerelease }}.unitypackage
-            ${{ steps.package_data.outputs.name }}-${{ steps.tag_version.outputs.inc-prerelease }}.zip
+            ${{ steps.package_data.outputs.name }}-${{ env.version }}.unitypackage
+            ${{ steps.package_data.outputs.name }}-${{ env.version }}.zip
             ${{ env.PACKAGE_JSON }}
-          tag_name: ${{ steps.tag_version.outputs.inc-prerelease }}
+          tag_name: ${{ env.version }}
           prerelease: true
