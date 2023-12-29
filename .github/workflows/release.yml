@@ -29,17 +29,16 @@ jobs:
         with:
           file_path: "${{ env.PACKAGE_JSON }}"
 
-      - uses: WyriHaximus/github-action-get-previous-tag@v1.3.0
-        id: previous_tag
-        with:
-          fallback: 0.0.0
+      - name: Get last tag
+        run: |
+          echo "old_tag=$(git tag -l | head -n1)" >> $GITHUB_ENV
 
       - name: Parse git tag version
         id: tag_version
         uses: madhead/semver-utils@v3.1.0
         with:
           lenient: false
-          version: ${{ steps.previous_tag.outputs.tag }}
+          version: ${{ env.old_tag }}
           compare-to: ${{ steps.package_data.outputs.version }}
       - name: Pick Incremented old tag
         id: tag_pre_release
