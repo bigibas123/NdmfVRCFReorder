@@ -48,7 +48,7 @@ jobs:
         id: tag_pre_release
         if: ${{ steps.tag_version.outputs.comparison-result != '<' }}
         run: |
-          echo "version=${{ steps.tag_version.outputs.inc-prerelease }}" >> $GITHUB_ENV
+          echo "version=${{ steps.tag_version.outputs.inc-patch  }}" >> $GITHUB_ENV
       - name: Pick package version
         id: tag_post_release
         if: ${{ steps.tag_version.outputs.comparison-result == '<' }}
