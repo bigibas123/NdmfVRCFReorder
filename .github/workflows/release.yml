@@ -35,7 +35,7 @@ jobs:
 
       - name: Get last tag
         run: |
-          echo "old_tag=$(git tag -l | head -n1)" | tee -a $GITHUB_ENV
+          echo "old_tag=$(git describe --tags --abbrev=0)" | tee -a $GITHUB_ENV
 
       - name: Parse git tag version
         id: tag_version
