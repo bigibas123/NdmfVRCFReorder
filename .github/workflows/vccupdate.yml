@@ -1,3 +1,4 @@
+name: Trigger VCC Update
 on: 
   release:
   workflow_dispatch:
@@ -17,5 +18,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
         run: |
-          gh workflow run build-listing.yml --repo bigibas123/VCC
+          gh workflow run --repo bigibas123/VCC build-listing.yml 
  
