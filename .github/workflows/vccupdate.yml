@@ -2,6 +2,8 @@ name: Trigger VCC Update
 on: 
   release:
   workflow_dispatch:
+env:
+  VCC_REPO: VCC
 
 jobs:
   trigger_vcc:
@@ -13,10 +15,11 @@ jobs:
         with:
           app-id: ${{ vars.DEPLOY_APP_ID }}
           private-key: ${{ secrets.DEPLOY_APP_PRIVATE_KEY }}
-
+          owner: ${{ github.repository_owner }}
+          repositories: ${{ env.VCC_REPO }}
       - name: Use the token
         env:
           GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
         run: |
-          gh workflow run --repo bigibas123/VCC build-listing.yml 
+          gh workflow run --repo ${{ github.repository_owner }}/${{ env.VCC_REPO }} build-listing.yml 
  
