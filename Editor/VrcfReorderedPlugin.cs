@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+using System;
+using System.Reflection;
 using nadena.dev.ndmf;
 using tk.dingemans.bigibas123.NdmfVrcfReorder;
 using UnityEngine;
@@ -16,6 +17,9 @@ namespace tk.dingemans.bigibas123.NdmfVrcfReorder
 
 		private static readonly string TAG = "[VrcfReordered]";
 
+		private static readonly object vrcFuryBuildSuccesEnum =
+			Enum.ToObject(typeof(VRCFuryBuilder).Assembly.GetType("VF.Builder.VRCFuryBuilder+Status"), 0);
+
 		protected override void Configure()
 		{
 			InPhase(BuildPhase.Optimizing)
@@ -25,18 +29,18 @@ namespace tk.dingemans.bigibas123.NdmfVrcfReorder
 				{
 					if (!Application.isPlaying)
 					{
-						var builder = new VRCFuryBuilder();
-						var method = GetVrcfBuilderSafeRunMethod();
+						VRCFuryBuilder builder = new VRCFuryBuilder();
+						MethodInfo method = GetVrcfBuilderSafeRunMethod();
 						Debug.Log($"{TAG} Running upload method: {method}");
-						bool vrcFurySuccess = (bool)method.Invoke(builder, new object[]
+						object vrcFuryStatus = method.Invoke(builder, new object[]
 						{
 							ctx.AvatarRootObject.asVf(),
 							null
 						});
-						if (!vrcFurySuccess)
+						if (!vrcFuryBuildSuccesEnum.Equals(vrcFuryStatus))
 						{
 							throw new VRCFBuilderException(
-								"Error building VRCF from Reordered position please check log for details");
+								"Error building VRCF from Reordered position please check log for details, return code: "+vrcFuryStatus + ", wanted: "+vrcFuryBuildSuccesEnum);
 						}
 					}
 					else
