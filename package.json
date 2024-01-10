@@ -10,7 +10,7 @@
   "description" : "Hopefully reorders some C# classes to run ndmf and vrcfury in the right order",
   "vpmDependencies" : {
     "nadena.dev.ndmf" : "1.x.x",
-	"com.vrcfury.vrcfury": "1.x"
+	"com.vrcfury.vrcfury": ">=1.690.x"
   },
   "url" : "https://github.com/bigibas123/tk.dingemans.bigibas123.ndmfvrcfreorder.git",
   "legacyFolders" : {},
