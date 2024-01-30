@@ -25,7 +25,7 @@ namespace tk.dingemans.bigibas123.NdmfVrcfReorder
 
 		protected override void Configure()
 		{
-			InPhase(BuildPhase.Optimizing)
+			InPhase(BuildPhase.Transforming)
 				.AfterPlugin("com.anatawa12.avatar-optimizer")
 				.AfterPlugin("nadena.dev.modular-avatar")
 				.Run("VRCFury but at a non-default time", ctx =>
