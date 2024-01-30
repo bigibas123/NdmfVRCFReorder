@@ -1,11 +1,14 @@
 using System;
 using System.Reflection;
+using System.Linq;
 using nadena.dev.ndmf;
 using tk.dingemans.bigibas123.NdmfVrcfReorder;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using VF;
 using VF.Builder;
 using VF.Builder.Exceptions;
+using Debug = UnityEngine.Debug;
 
 [assembly: ExportsPlugin(typeof(VrcfReorderedPlugin))]
 namespace tk.dingemans.bigibas123.NdmfVrcfReorder
@@ -27,6 +30,10 @@ namespace tk.dingemans.bigibas123.NdmfVrcfReorder
 				.AfterPlugin("nadena.dev.modular-avatar")
 				.Run("VRCFury but at a non-default time", ctx =>
 				{
+    					if(InsideVRCFuryCall()){
+	 					Debug.Log($"{TAG} Currently inside of vrcfury call, not re-running vrcfury");
+	 					return;
+					}
 					if (!Application.isPlaying)
 					{
 						VRCFuryBuilder builder = new VRCFuryBuilder();
@@ -52,7 +59,19 @@ namespace tk.dingemans.bigibas123.NdmfVrcfReorder
 					}
 				});
 		}
+		private bool InsideVRCFuryCall()
+		{
+			System.Diagnostics.StackTrace stackTrace = new System.Diagnostics.StackTrace();
+			foreach (var frame in stackTrace.GetFrames())
+			{
+				Debug.Log($"{TAG} Frame: " + frame.GetMethod().DeclaringType.FullName + " " + frame.GetMethod());
+			}
 
+			return stackTrace.GetFrames()
+				.Select(frame => { return frame.GetMethod().DeclaringType; })
+				.Any(type => typeof(PlayModeTrigger) == type || typeof(VRCFuryBuilder) == type);
+		}
+  
 		private MethodInfo GetVrcfPlaymodeRescanMethod()
 		{
 			MethodInfo dynMethod = typeof(VF.PlayModeTrigger).GetMethod("OnSceneLoaded",
@@ -67,6 +86,9 @@ namespace tk.dingemans.bigibas123.NdmfVrcfReorder
 				BindingFlags.DeclaredOnly | BindingFlags.IgnoreCase | BindingFlags.NonPublic |
 				BindingFlags.Instance);
 			return dynMethod;
+		}
+  		private bool InVRCFuryCall(){
+    			
 		}
 	}
 }
