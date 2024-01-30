@@ -35,7 +35,8 @@ namespace tk.dingemans.bigibas123.NdmfVrcfReorder
 						object vrcFuryStatus = method.Invoke(builder, new object[]
 						{
 							ctx.AvatarRootObject.asVf(),
-							null
+							null,
+							true,
 						});
 						if (!vrcFuryBuildSuccesEnum.Equals(vrcFuryStatus))
 						{
