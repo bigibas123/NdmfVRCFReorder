@@ -87,8 +87,5 @@ namespace tk.dingemans.bigibas123.NdmfVrcfReorder
 				BindingFlags.Instance);
 			return dynMethod;
 		}
-  		private bool InVRCFuryCall(){
-    			
-		}
 	}
 }
