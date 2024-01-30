@@ -36,7 +36,7 @@ namespace tk.dingemans.bigibas123.NdmfVrcfReorder
 						{
 							ctx.AvatarRootObject.asVf(),
 							null,
-							true,
+							false,
 						});
 						if (!vrcFuryBuildSuccesEnum.Equals(vrcFuryStatus))
 						{
