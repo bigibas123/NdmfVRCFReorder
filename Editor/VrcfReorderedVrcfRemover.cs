@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 using VRC.SDKBase.Editor.BuildPipeline;
 using UnityEditor;
 using System.Collections.Generic;
@@ -17,6 +17,7 @@ namespace tk.dingemans.bigibas123.NdmfVrcfReorder
             VRCSdkControlPanel.OnSdkPanelEnable += (sender, e) =>
             {
                 FixList();
+                
                 if (VRCSdkControlPanel.TryGetBuilder<IVRCSdkBuilderApi>(out var builder))
                 {
                     builder.OnSdkBuildStart += (sender2, target) => { FixList(); };
@@ -48,7 +49,10 @@ namespace tk.dingemans.bigibas123.NdmfVrcfReorder
                 switch (callback.GetType().FullName)
                 {
                     case "VF.VrcHooks.PreuploadHook":
-                        Debug.Log($"{TAG} Found VRCFury PreuploadHook");
+                        Debug.Log($"{TAG} Found VRCFury VrcHooks PreuploadHook");
+                        return true;
+                    case "VF.Hooks.VrcPreuploadHook":
+                        Debug.Log($"{TAG} Found VRCFury Hooks VrcPreuploadHook");
                         return true;
                     default:
                         return false;
