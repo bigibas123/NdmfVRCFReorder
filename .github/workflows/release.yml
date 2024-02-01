@@ -68,7 +68,7 @@ jobs:
           include-files: metaList
       - name: Create Package Zip
         working-directory: "${{ env.PACKAGE_PATH }}"
-        run: zip -r "${{ steps.package_data.outputs.name }}-${{ env.version }}.zip" .
+        run: zip -r "${{ steps.package_data.outputs.name }}-${{ env.version }}.zip" . -x metaList ${{ steps.package_data.outputs.name }}-${{ env.version }}.unitypackage
 
       - name: Create Tag
         id: create_tag
