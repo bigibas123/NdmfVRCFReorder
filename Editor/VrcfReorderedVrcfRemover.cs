@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 using VRC.SDKBase.Editor.BuildPipeline;
 using UnityEditor;
 using System.Collections.Generic;
