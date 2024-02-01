@@ -33,7 +33,7 @@ namespace tk.dingemans.bigibas123.NdmfVrcfReorder
 				{
 					if (InsideVRCFuryCall())
 					{
-						Debug.Log($"{TAG} Currently inside of vrcfury call, not re-running vrcfury");
+						Debug.LogWarning($"{TAG} Currently inside of vrcfury call, not re-running vrcfury");
 						return;
 					}
 
