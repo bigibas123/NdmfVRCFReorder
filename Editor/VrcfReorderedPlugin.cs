@@ -11,6 +11,7 @@ using VF.Builder.Exceptions;
 using Debug = UnityEngine.Debug;
 
 [assembly: ExportsPlugin(typeof(VrcfReorderedPlugin))]
+
 namespace tk.dingemans.bigibas123.NdmfVrcfReorder
 {
 	public class VrcfReorderedPlugin : Plugin<VrcfReorderedPlugin>
@@ -25,40 +26,35 @@ namespace tk.dingemans.bigibas123.NdmfVrcfReorder
 
 		protected override void Configure()
 		{
-			InPhase(BuildPhase.Transforming)
+			InPhase(BuildPhase.Optimizing)
 				.AfterPlugin("com.anatawa12.avatar-optimizer")
 				.AfterPlugin("nadena.dev.modular-avatar")
 				.Run("VRCFury but at a non-default time", ctx =>
 				{
-    					if(InsideVRCFuryCall()){
-	 					Debug.Log($"{TAG} Currently inside of vrcfury call, not re-running vrcfury");
-	 					return;
-					}
-					if (!Application.isPlaying)
+					if (InsideVRCFuryCall())
 					{
-						VRCFuryBuilder builder = new VRCFuryBuilder();
-						MethodInfo method = GetVrcfBuilderSafeRunMethod();
-						Debug.Log($"{TAG} Running upload method: {method}");
-						object vrcFuryStatus = method.Invoke(builder, new object[]
-						{
-							ctx.AvatarRootObject.asVf(),
-							null,
-							false,
-						});
-						if (!vrcFuryBuildSuccesEnum.Equals(vrcFuryStatus))
-						{
-							throw new VRCFBuilderException(
-								"Error building VRCF from Reordered position please check log for details, return code: "+vrcFuryStatus + ", wanted: "+vrcFuryBuildSuccesEnum);
-						}
+						Debug.Log($"{TAG} Currently inside of vrcfury call, not re-running vrcfury");
+						return;
 					}
-					else
+
+					VRCFuryBuilder builder = new VRCFuryBuilder();
+					MethodInfo method = GetVrcfBuilderSafeRunMethod();
+					Debug.Log($"{TAG} Running upload method: {method}");
+					object vrcFuryStatus = method.Invoke(builder, new object[]
 					{
-						var method = GetVrcfPlaymodeRescanMethod();
-						Debug.Log($"{TAG} Running play mode method: {method}");
-						method.Invoke(null, new object[] { ctx.AvatarRootObject.scene, LoadSceneMode.Single });
+						ctx.AvatarRootObject.asVf(),
+						null,
+						false,
+					});
+					if (!vrcFuryBuildSuccesEnum.Equals(vrcFuryStatus))
+					{
+						throw new VRCFBuilderException(
+							"Error building VRCF from Reordered position please check log for details, return code: " +
+							vrcFuryStatus + ", wanted: " + vrcFuryBuildSuccesEnum);
 					}
 				});
 		}
+
 		private bool InsideVRCFuryCall()
 		{
 			System.Diagnostics.StackTrace stackTrace = new System.Diagnostics.StackTrace();
@@ -71,7 +67,7 @@ namespace tk.dingemans.bigibas123.NdmfVrcfReorder
 				.Select(frame => { return frame.GetMethod().DeclaringType; })
 				.Any(type => typeof(PlayModeTrigger) == type || typeof(VRCFuryBuilder) == type);
 		}
-  
+
 		private MethodInfo GetVrcfPlaymodeRescanMethod()
 		{
 			MethodInfo dynMethod = typeof(VF.PlayModeTrigger).GetMethod("OnSceneLoaded",
