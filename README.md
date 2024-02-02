@@ -1,6 +1,8 @@
 # NDMF VRCF Reorderer
 # <span style="color:red">Should not be necessary anymore from VRCFury 1.648.0 onwards and ndmf 1.3.0 onwards</span>
 
+[VCC Repo](https://bigibas123.github.io/VCC/)
+
 Tries to make running [VRCFury](https://vrcfury.com/) with [NDMF](https://github.com/bdunderscore/ndmf.git) and [AvatarOptimizer](https://github.com/anatawa12/AvatarOptimizer.git) a bit more predictable.
 
 It does this by removing the main vrcfury from the avatar building hooks and calling VRCFury at the end of the optimization step of NDMF instead.
