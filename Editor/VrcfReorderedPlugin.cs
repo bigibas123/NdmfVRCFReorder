@@ -43,7 +43,6 @@ namespace tk.dingemans.bigibas123.NdmfVrcfReorder
 					object vrcFuryStatus = method.Invoke(builder, new object[]
 					{
 						ctx.AvatarRootObject.asVf(),
-						null,
 						false,
 					});
 					if (!vrcFuryBuildSuccesEnum.Equals(vrcFuryStatus))
@@ -78,7 +77,7 @@ namespace tk.dingemans.bigibas123.NdmfVrcfReorder
 
 		private MethodInfo GetVrcfBuilderSafeRunMethod()
 		{
-			MethodInfo dynMethod = typeof(VRCFuryBuilder).GetMethod("SafeRun",
+			MethodInfo dynMethod = typeof(VRCFuryBuilder).GetMethod("SafeRun", 
 				BindingFlags.DeclaredOnly | BindingFlags.IgnoreCase | BindingFlags.NonPublic |
 				BindingFlags.Instance);
 			return dynMethod;
