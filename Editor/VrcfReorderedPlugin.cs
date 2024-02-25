@@ -3,8 +3,6 @@ using System.Reflection;
 using System.Linq;
 using nadena.dev.ndmf;
 using tk.dingemans.bigibas123.NdmfVrcfReorder;
-using UnityEngine;
-using UnityEngine.SceneManagement;
 using VF;
 using VF.Builder;
 using VF.Builder.Exceptions;
@@ -43,7 +41,6 @@ namespace tk.dingemans.bigibas123.NdmfVrcfReorder
 					object vrcFuryStatus = method.Invoke(builder, new object[]
 					{
 						ctx.AvatarRootObject.asVf(),
-						false,
 					});
 					if (!vrcFuryBuildSuccesEnum.Equals(vrcFuryStatus))
 					{
@@ -77,7 +74,7 @@ namespace tk.dingemans.bigibas123.NdmfVrcfReorder
 
 		private MethodInfo GetVrcfBuilderSafeRunMethod()
 		{
-			MethodInfo dynMethod = typeof(VRCFuryBuilder).GetMethod("SafeRun", 
+			MethodInfo dynMethod = typeof(VRCFuryBuilder).GetMethod("SafeRun",
 				BindingFlags.DeclaredOnly | BindingFlags.IgnoreCase | BindingFlags.NonPublic |
 				BindingFlags.Instance);
 			return dynMethod;
