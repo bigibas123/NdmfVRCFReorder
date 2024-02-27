@@ -56,10 +56,6 @@ jobs:
           echo "version=${{ steps.package_data.outputs.version }}" >> $GITHUB_ENV
       - name: Replace version in package.json
         run: jq ' .version = "${{ env.version }}"' ${{ env.PACKAGE_JSON }}  > tmp && mv tmp ${{ env.PACKAGE_JSON }}
-        
-      - name: Track Package Meta Files
-        run: |
-          find "." -name \*.meta >> metaList
       
       - name: Create Package Zip
         working-directory: "${{ env.PACKAGE_PATH }}"
