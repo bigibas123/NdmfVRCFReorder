@@ -1,5 +1,7 @@
 # NDMF VRCF Reorderer
-# <span style="color:red">Should not be necessary anymore from VRCFury 1.648.0 onwards and ndmf 1.3.0 onwards</span>
+
+# <span style="color:red">Installing this package will make your VRCFury install unsupported, if you encounter any bugs try uninstalling this, restarting unity and checking if your still run into it.</span>
+# <span style="color:red">This package should not be necessary anymore from VRCFury 1.648.0 onwards and ndmf 1.3.0 onwards</span>
 
 [VCC Repo](https://bigibas123.github.io/VCC/)
 
