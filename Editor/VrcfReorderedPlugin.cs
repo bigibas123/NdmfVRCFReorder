@@ -2,7 +2,7 @@ using System;
 using System.Reflection;
 using System.Linq;
 using nadena.dev.ndmf;
-using tk.dingemans.bigibas123.NdmfVrcfReorder;
+using cc.dingemans.bigibas123.NdmfVrcfReorder;
 using VF;
 using VF.Builder;
 using VF.Builder.Exceptions;
@@ -10,11 +10,11 @@ using Debug = UnityEngine.Debug;
 
 [assembly: ExportsPlugin(typeof(VrcfReorderedPlugin))]
 
-namespace tk.dingemans.bigibas123.NdmfVrcfReorder
+namespace cc.dingemans.bigibas123.NdmfVrcfReorder
 {
 	public class VrcfReorderedPlugin : Plugin<VrcfReorderedPlugin>
 	{
-		public override string QualifiedName => "tk.dingemans.bigibas123.NdmfVrcfReorder.VrcfReorderedPlugin";
+		public override string QualifiedName => "cc.dingemans.bigibas123.NdmfVrcfReorder.VrcfReorderedPlugin";
 		public override string DisplayName => "VRCFury Reordered";
 
 		private static readonly string TAG = "[VrcfReordered]";
